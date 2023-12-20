@@ -12,41 +12,33 @@ Das Projekt macht einen Localhost auf port 3000 auf dem mehrere Endpunkte existi
 
 ## Installation
 
-Beschreibe hier, wie Entwickler dein Projekt lokal installieren können. 
+Installiere Node.js auf https://nodejs.org/en
 
 ```bash
-# Beispiel für die Installation von Abhängigkeiten
-npm install
+# Installation von Abhängigkeiten
+npm install express
+npm install body-parser
+npm install jsonwebtoken
+npm install swagger-ui-express
+npm install ./swagger_output.json
+npm install swagger-autogen
+
 ```
 
 ## Verwendung
 
-Erkläre, wie Entwickler dein Projekt verwenden können.
+Starte Programm.js und navigiere danach auf http://localhost:3000/swagger-ui/#/
 
 ```bash
-# Beispiel für die Ausführung deiner Anwendung
-npm start
+# Ausführung der Anwendung
+node start Programm.js
 ```
 
-## API-Dokumentation
-
-Verweise hier auf die generierte API-Dokumentation, wenn vorhanden.
-
-```bash
-# Beispiel für die Generierung der API-Dokumentation
-npm run docs
+Navigiere jetzt auf Postman und importiere die Cristian-Martin-295.postman_collection.json. Ändere den Request zu POST. Gebe diese Json eingabe im body ein: 
+```json
+{
+    "email": "cristian.martin@zli.com",
+    "password": "Halloballo123"
+}
 ```
-
-## Beitrag
-
-Erkläre, wie andere Entwickler zu deinem Projekt beitragen können. Dies könnte Links zu Beitragshinweisen, Richtlinien für Pull-Anfragen usw. umfassen.
-
-## Lizenz
-
-Gib die Lizenzinformationen für dein Projekt an. Zum Beispiel:
-
-Dieses Projekt ist unter der [MIT Lizenz](LICENSE) lizenziert.
-
-```
-
-Ersetze "Project Name" und die Abschnitte mit den relevanten Informationen für dein Projekt. Du kannst auch spezifische Anweisungen für die Installation, Verwendung und den Beitrag in deinem README.md hinzufügen.
+Danach sende einen Request zu http://localhost:3000/login und du wirst einen Token bekommen der kann so aussehen "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiY3Jpc3RpYW4ubWFydGluQHpsaS5jb20iLCJpYXQiOjE3MDMwNzgwNjB9.WckEMLzw8d1A5h_hNQDyxdgnWi1Dt-5FFXkJxQ8i9zI". Speichere den Token da du ihn noch brauchen wirst. Bei jedem Request (ausser bei /login) ist es jetzt erforderlich dass du zu authentification gehst, die Authentifizierung auf Bearer Token stellst und den Token einfügst. Jetzt kannst du auf http://localhost:3000/tasks gehen. Mit GET kannst du alle einträge sehen, mit POST kannst du einen neuen Eintrag in JSON format schreiben. Auf http://localhost:3000/tasks/1 kannst du mit GET den ersten eintrag sehen, mit PUT den ersten Eintrag bearbeiten und mit DELETE den ersten eintrag löschen. Mit http://localhost:3000/logout auf DELETE kannst du dich ausloggen.

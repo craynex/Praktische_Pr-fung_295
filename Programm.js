@@ -2,6 +2,8 @@
 // Das Programm macht mehrere Endpunkte auf einem Lokalem Host
 // 20.12.2023
 
+
+// Alles Installieren
 const express = require('express')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken') 
@@ -10,10 +12,11 @@ const swaggerDocument = require('./swagger_output.json');
 
 
 const app = express();
-const port = 3000;
+const port = 3000; // Port kann hier geändert werden
 
 app.use(bodyParser.json());
 
+// Task Liste
 let tasks = [
 {     
       id: 1, 
@@ -76,10 +79,12 @@ app.delete('/logout', authenticate, (req, res) => {
 
 // Generiert mit ChatGPT bis hier
 
+// Endpunkt GET /tasks um alle Tasks anzusehen
 app.get('/tasks', authenticate, (req, res) => {
       res.status(200).json(tasks);
 })
 
+// Endpunkt POST /tasks um einen Task zu erstellen
 app.post('/tasks', authenticate, (req, res) => {
       // Korrigiert mit ChatGPT von hier
       const newtask = req.body;
@@ -88,6 +93,7 @@ app.post('/tasks', authenticate, (req, res) => {
       // Korrigiert mit ChatGPT bis hier
 });
 
+// Endpunkt GET /tasks/(1) um einen Tasks anzusehen
 app.get('/tasks/:id', authenticate, (req, res) => {
       const taskId = parseInt(req.params.id);
       const task = tasks.find(t => t.id === taskId);
@@ -99,6 +105,7 @@ app.get('/tasks/:id', authenticate, (req, res) => {
       }
 });
 
+// Endpunkt PUT /tasks/(1) um einen Task zu bearbeiten
 app.put('/tasks/:id', authenticate, (req, res) => {
       const taskId = parseInt(req.params.id);
       const updatedtask = req.body;
@@ -112,6 +119,7 @@ app.put('/tasks/:id', authenticate, (req, res) => {
       }
 });
 
+// Endpunkt DELETE /tasks(1) um alle Tasks anzusehen
 app.delete('/tasks/:id', authenticate, (req, res) => {
       const taskId = parseInt(req.params.id);
       const index = tasks.findIndex(t => t.id === taskId)
@@ -125,6 +133,7 @@ app.delete('/tasks/:id', authenticate, (req, res) => {
         });
       // Korrigiert mit ChatGPT bis hier
 
+// Endpunkt POST /Login zum einloggen
 app.post('/login', (req, res) => {
       const{email, password} = req.body;
 
@@ -138,9 +147,8 @@ app.post('/login', (req, res) => {
 
 app.use('/swagger-ui/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Generiert mit ChatGPT von hier
 app.listen(port, () => {
       console.log(`Server listening at http://localhost:${port}`);
 });
 // Generiert mit ChatGPT bis hier
-
-// Verwenden von Swagger UI Middleware
